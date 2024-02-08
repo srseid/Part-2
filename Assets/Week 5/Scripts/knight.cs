@@ -9,6 +9,7 @@ public class knight : MonoBehaviour
     public float speed = 3;
     Rigidbody2D rb;
     Animator animator;
+    bool clickingOnSelf = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,10 +29,20 @@ public class knight : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !clickingOnSelf)
+            //exclamation point means not
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         animator.SetFloat("movement", movement.magnitude);
+    }
+    private void OnMouseDown()
+    {
+        clickingOnSelf = true;
+        animator.SetTrigger("takeDamage");
+    }
+    private void OnMouseUp()
+    {
+        clickingOnSelf = false;
     }
 }
