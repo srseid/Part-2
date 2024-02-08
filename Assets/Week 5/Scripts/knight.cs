@@ -72,4 +72,12 @@ public class knight : MonoBehaviour
         }
         
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.CompareTag("dangerZone"))
+        {
+            SendMessage("takeDamage", 1);
+        }
+    }
 }
