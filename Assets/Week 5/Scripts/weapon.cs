@@ -22,6 +22,6 @@ public class weapon : MonoBehaviour
     {
         rigidbody.MovePosition(rigidbody.position + (Vector2)transform.up * speed * Time.deltaTime);
 
-        Destroy(gameObject, 5.0f);
+        Destroy(gameObject, 10.0f);
     }
 }
