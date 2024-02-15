@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;  //gimme access to this part of unity
 
 public class knight : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class knight : MonoBehaviour
     {
         if (isDead) return;
 
-        if(Input.GetMouseButtonDown(0) && !clickingOnSelf)
+        if (Input.GetMouseButtonDown(0) && !clickingOnSelf && !EventSystem.current.IsPointerOverGameObject())
             //exclamation point means not
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
