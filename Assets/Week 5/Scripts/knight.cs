@@ -12,6 +12,7 @@ public class knight : MonoBehaviour
     bool clickingOnSelf = false;
     public float health;
     public float maxHealth = 5;
+    bool isDead = false;
     
     void Start()
     {
@@ -22,6 +23,8 @@ public class knight : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDead) return;
+
         movement = destination - (Vector2)transform.position;
 
         if(movement.magnitude < 0.1)
@@ -33,6 +36,8 @@ public class knight : MonoBehaviour
     }
     void Update()
     {
+        if (isDead) return;
+
         if(Input.GetMouseButtonDown(0) && !clickingOnSelf)
             //exclamation point means not
         {
@@ -47,6 +52,7 @@ public class knight : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        if (isDead) return;
         clickingOnSelf = true;
         SendMessage("takeDamage", 1);
         
@@ -64,10 +70,12 @@ public class knight : MonoBehaviour
         if (health ==0)
         {
             //die?
+            isDead = true;
             animator.SetTrigger("death");
         }
         else
         {
+            isDead = false;
             animator.SetTrigger("takeDamage");
         }
         
